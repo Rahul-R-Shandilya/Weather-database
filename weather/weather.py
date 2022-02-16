@@ -22,13 +22,13 @@ def getWeather(canvas):
     sunrise = time.strftime("%I:%M:%S", time.gmtime(json_data['sys']['sunrise'] - 21600))
     sunset = time.strftime("%I:%M:%S", time.gmtime(json_data['sys']['sunset'] - 21600))
     
-    c.execute('CREATE TABLE IF NOT EXISTS info (temp INT,min_temp INT,max_temp INT, pressure REAL, humidity REAL, sunrise TIME, sunset TIME)')
+    c.execute('CREATE TABLE IF NOT EXISTS WeatherForecasts (temp INT,min_temp INT,max_temp INT, pressure REAL, humidity REAL, sunrise TIME, sunset TIME)')
 
-    c.execute("INSERT INTO info (temp, min_temp, max_temp, pressure, humidity, sunrise, sunset ) VALUES(?, ?, ?, ?, ?, ?, ?)",
+    c.execute("INSERT INTO WeatherForecasts (temp, min_temp, max_temp, pressure, humidity, sunrise, sunset ) VALUES(?, ?, ?, ?, ?, ?, ?)",
                                                   (temp, min_temp, max_temp, pressure, humidity, sunrise, sunset ))
  
     
-    c.execute("SELECT * FROM info")
+    c.execute("SELECT * FROM WeatherForecasts")
     results = c.fetchall()
     print(results)
     
